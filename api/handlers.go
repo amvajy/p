@@ -2,7 +2,6 @@ package api
 
 import (
 	"database/sql"
-	"encoding/json"
 	"net/http"
 	"strconv"
 
@@ -225,7 +224,7 @@ func CreateConfigHandler(db *sql.DB) gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "创建失败"})
 			return
 		}
-		auditEvent(c, "create_config", strconv.Itoa(id), "success")
+		auditEvent(c, "create_config", strconv.FormatInt(id, 10), "success")
 		c.JSON(http.StatusOK, gin.H{"id": id})
 	}
 }
@@ -296,4 +295,4 @@ func ApplyConfigHandler(db *sql.DB, cfg *config.Config) gin.HandlerFunc {
 		c.JSON(http.StatusOK, gin.H{"status": "success", "message": "配置已应用到服务器"})
 	}
 }
-
+

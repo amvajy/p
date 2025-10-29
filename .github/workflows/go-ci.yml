@@ -12,6 +12,8 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,3 +38,13 @@ jobs:
 
       - name: Test
         run: go test ./... -v
+
+      - name: Verify GITHUB_TOKEN availability
+        shell: bash
+        run: |
+          if [ -z "$GITHUB_TOKEN" ]; then
+            echo "GITHUB_TOKEN missing" >&2
+            exit 1
+          else
+            echo "GITHUB_TOKEN available"
+          fi

@@ -1,0 +1,18 @@
+{
+  "server_address": ":8080",
+  "database": {
+    "driver": "sqlite",
+    "sqlite_path": "./data/pxe.db",
+    "mysql_dsn": "root:password@tcp(127.0.0.1:3306)/pxe_manager?parseTime=true"
+  },
+  "auth": {
+    "ip_whitelist": ["127.0.0.1/32", "192.168.88.0/24"],
+    "rate_limit": 100,
+    "enable_audit": true,
+    "audit_log_path": "./logs/audit.log"
+  },
+  "tftp": {
+    "root": "/var/lib/tftpboot",
+    "enable_uefi": true
+  }
+}

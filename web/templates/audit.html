@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>审计日志查看</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>审计日志查看</h1>
+    <div class="auth">
+      <a href="/templates/index.html" style="color:#fff;">返回首页</a>
+      <label for="authToken">令牌</label>
+      <input id="authToken" type="text" placeholder="Bearer Token" />
+      <button id="saveTokenBtn">保存令牌</button>
+      <span id="tokenStatus" class="muted"></span>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>日志列表</h2>
+      <div class="actions">
+        <label>偏移<input type="number" id="offset" value="0" /></label>
+        <label>条数<input type="number" id="limit" value="100" /></label>
+        <label>排序<select id="order"><option value="desc">最新在前</option><option value="asc">最旧在前</option></select></label>
+        <label>方法<select id="fMethod"><option value="">全部</option><option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option></select></label>
+        <label>路径含<input id="fPath" placeholder="/api/..." /></label>
+        <label>动作<input id="fAction" placeholder="apply/install..." /></label>
+        <label>状态<input id="fStatus" placeholder="ok/failed..." /></label>
+        <button id="loadBtn">加载</button>
+        <button id="exportBtn">导出当前</button>
+      </div>
+      <pre id="logs" class="debug"></pre>
+    </section>
+  </main>
+
+  <script src="/static/js/audit.js"></script>
+</body>
+</html>

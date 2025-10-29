@@ -1,0 +1,31 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Go build
+bin/
+*.exe
+*.log
+
+# Data & logs
+/data/
+/logs/
+*.db
+*.sqlite
+
+# Python stub
+__pycache__/
+.venv/
+*.pyc
+
+# Node (if introduced later)
+node_modules/
+dist/
+
+# TFTP artifacts (generated)
+pxelinux.cfg/
+efi/

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>PXE Manager 控制台</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>PXE Manager 控制台</h1>
+    <div class="auth">
+      <label for="authToken">认证令牌</label>
+        <input id="authToken" type="text" placeholder="Bearer Token" />
+        <button id="saveTokenBtn">保存令牌</button>
+        <span id="tokenStatus" class="muted"></span>
+        <span id="backendStatus" class="muted">后端状态：未知</span>
+        <a href="/templates/audit.html" class="link" style="margin-left:12px;color:#fff;text-decoration:underline;">审计日志</a>
+      </div>
+    </header>
+
+  <main>
+    <section>
+      <h2>服务器列表</h2>
+      <div class="actions">
+        <label>状态筛选
+          <select id="serversStatus">
+            <option value="pending" selected>待确认</option>
+            <option value="confirmed">已确认</option>
+            <option value="installed">已安装</option>
+            <option value="">全部</option>
+          </select>
+        </label>
+        <button id="refreshServersBtn">刷新列表</button>
+      </div>
+      <table id="serversTable">
+        <thead>
+          <tr>
+            <th>序列号</th>
+            <th>主机名</th>
+            <th>IP</th>
+            <th>MAC</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>配置模板</h2>
+      <div class="actions">
+        <button id="refreshConfigsBtn">刷新列表</button>
+      </div>
+      <table id="configsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>系统类型</th>
+            <th>系统版本</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <h3>创建/更新模板</h3>
+      <form id="configForm">
+        <div class="grid">
+          <label>模板ID（更新填写）<input type="number" id="cfgId" /></label>
+          <label>名称<input type="text" id="cfgName" required /></label>
+          <label>描述<input type="text" id="cfgDescription" /></label>
+          <label>系统类型<select id="cfgSystemType">
+            <option>CentOS</option>
+            <option>RHEL</option>
+            <option>Ubuntu</option>
+            <option>Debian</option>
+          </select></label>
+          <label>系统版本<input type="text" id="cfgSystemVersion" /></label>
+        </div>
+        <label>ConfigContent<textarea id="cfgContent" rows="6" placeholder="# kickstart/preseed 内容或其他配置"></textarea></label>
+        <label>KernelParams<textarea id="cfgKernelParams" rows="3"></textarea></label>
+        <label>Packages<textarea id="cfgPackages" rows="3"></textarea></label>
+        <div class="actions">
+          <button type="submit">提交</button>
+        </div>
+      </form>
+    </section>
+
+    <section>
+      <h2>应用模板到服务器</h2>
+      <form id="applyForm" class="apply">
+        <label>模板ID<input type="number" id="applyCfgId" required /></label>
+        <label>服务器序列号<input type="text" id="applySerial" required /></label>
+        <div class="actions">
+          <button type="submit">应用并生成 PXE 配置</button>
+        </div>
+      </form>
+    </section>
+
+    <section>
+      <h2>调试工具</h2>
+      <div class="actions">
+        <button id="loadAllBtn">加载全部数据</button>
+      </div>
+      <pre id="debugOutput" class="debug"></pre>
+    </section>
+  </main>
+
+  <footer>
+    <span class="muted">预览模式：当前页面会尝试调用后端 API。如你的环境未安装 Go 或未启动后端，数据加载将失败，但 UI 可正常展示。</span>
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>服务器详情</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>服务器详情</h1>
+    <div class="auth">
+      <a href="/templates/index.html" style="color:#fff;">返回首页</a>
+      <label for="authToken">令牌</label>
+      <input id="authToken" type="text" placeholder="Bearer Token" />
+      <button id="saveTokenBtn">保存令牌</button>
+      <span id="tokenStatus" class="muted"></span>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2 id="title">加载中...</h2>
+      <div class="actions">
+        <button id="btnConfirm">确认服务器</button>
+        <button id="btnInstall">标记安装</button>
+        <label>应用模板ID<input type="number" id="applyCfgIdDetail" /></label>
+        <button id="btnApplyCfg">应用模板</button>
+      </div>
+      <pre id="detail" class="debug"></pre>
+    </section>
+  </main>
+
+  <script src="/static/js/server.js"></script>
+</body>
+</html>

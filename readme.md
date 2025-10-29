@@ -432,8 +432,8 @@ go 1.19
 
 require (
     github.com/gin-gonic/gin v1.9.1
-    github.com/mattn/go-sqlite3 v1.14.17
-    github.com/sirupsen/logrus v1.9.3
+    modernc.org/sqlite v1.27.0
+    golang.org/x/time v0.5.0
 )
 
 构建脚本 (build.sh)
@@ -522,3 +522,4 @@ mkdir -p /var/lib/tftpboot/pxelinux.cfg
 cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/
 
 # p
+

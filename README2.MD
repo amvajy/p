@@ -10,7 +10,7 @@
 - 状态流转：pending（上报）→ confirmed（已确认）→ installed（装机完成，第一版手动标记）。
 
 三、技术栈与运行环境
-- 后端：Go 1.19、Gin、go-sqlite3、logrus。
+- 后端：Go 1.19+、Gin、modernc.org/sqlite（无CGO）、logrus（后续引入）。
 - 数据库：默认 SQLite，保留 MySQL 扩展。
 - 前端：原生 HTML/JS（先完善基础交互）。
 - 运行：Linux 优先，Windows 构建主要用于开发/编译；TFTP 在 Windows 下可选启用并预警。
@@ -41,7 +41,7 @@
 - 表 processed_requests：serial、request_id、created_at（主键：serial+request_id，幂等去重，72 小时清理）。
 - 索引：serial（唯一）、mac_address、status；processed_requests.created_at。
 - 触发器：在 servers 上使用“列集限定的 AFTER UPDATE”触发器，将 updated_at 更新为 CURRENT_TIMESTAMP。
-- SQLite 连接：DSN 使用 `?_journal_mode=WAL&_busy_timeout=5000&_foreign_keys=on`，初始化后校验 PRAGMA journal_mode。
+- SQLite 连接：驱动 `sqlite`，初始化时通过显式 PRAGMA 设置 foreign_keys=ON、busy_timeout=5000、journal_mode=WAL。
 
 六、安全与认证
 - 认证：Bearer Token（环境变量 `PXE_AUTH_TOKEN` 优先，开发环境可回退配置）。

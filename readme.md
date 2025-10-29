@@ -521,3 +521,4 @@ mkdir -p /var/lib/tftpboot/pxelinux.cfg
 # 复制PXE启动文件
 cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/
 
+# p
